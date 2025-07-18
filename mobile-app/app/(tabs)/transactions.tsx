@@ -5,25 +5,49 @@ import { HelloWave } from '@/components/HelloWave';
 import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
+import { IconSymbol } from '@/components/ui/IconSymbol';
+import { useThemeColor } from '@/hooks/useThemeColor';
+import { Button } from '@react-native-material/core';
 
 export default function HomeScreen() {
+  const colors = {
+    light: '#A1CEDC',
+    dark: '#1D3D47',
+  };
+  const color = useThemeColor(colors, "tint");
+
   return (
     <ParallaxScrollView
-      headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
+      headerBackgroundColor={colors}
       headerImage={
-        <Image
-          source={require('@/assets/images/partial-react-logo.png')}
-          style={styles.reactLogo}
+        <IconSymbol
+          size={310}
+          color="#808080"
+          name="library-books"
+          style={styles.headerImage}
         />
       }>
       <ThemedView style={styles.titleContainer}>
         <ThemedText type="title">Transakcje</ThemedText>
       </ThemedView>
+
+      <Button
+        title="Nowa transakcja"
+        leading={<IconSymbol name="add" size={24} color="#808080" />}
+        color={color}
+      />
+
     </ParallaxScrollView>
   );
 }
 
 const styles = StyleSheet.create({
+  headerImage: {
+    color: '#808080',
+    bottom: -90,
+    left: -35,
+    position: 'absolute',
+  },
   titleContainer: {
     flexDirection: 'row',
     alignItems: 'center',
