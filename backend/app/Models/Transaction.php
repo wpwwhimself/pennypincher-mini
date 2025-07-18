@@ -8,8 +8,12 @@ class Transaction extends Model
 {
     protected $fillable = [
         'account_id', 'category_id',
-        'label', 'description', 'amount',
+        'date', 'label', 'description', 'amount',
         'internal_transaction_account_id',
+    ];
+
+    protected $dates = [
+        'date',
     ];
 
     #region relations
