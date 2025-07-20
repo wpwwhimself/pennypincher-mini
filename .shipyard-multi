@@ -1,0 +1,2 @@
+This repository is comprised of multiple mini-projects.
+The purpose of this file is to inform Shipyard's `pull` to treat the subfolders as separate applications.
