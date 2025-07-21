@@ -9,11 +9,12 @@ import { useEffect, useState } from 'react';
 import Input from '@/components/pp/Input';
 import InputIcon from '@/components/pp/InputIcon';
 import { getAllAPIData, getAPIData, setAPIData } from '@/helpers/API';
+import HeaderIcon from '@/components/pp/HeaderIcon';
 
 export default function TabTwoScreen() {
   const colors = {
-    light: '#c57cceff',
-    dark: '#7d2c88ff',
+    light: '#f39bffff',
+    dark: '#ce85d7ff',
   };
   const color = useThemeColor(colors, "tint");
 
@@ -40,14 +41,7 @@ export default function TabTwoScreen() {
   return (
     <ParallaxScrollView
       headerBackgroundColor={colors}
-      headerImage={
-        <IconSymbol
-          size={310}
-          color="#808080"
-          name="person"
-          style={styles.headerImage}
-        />
-      }>
+      headerImage={<HeaderIcon name="person" />}>
       <ThemedView style={styles.titleContainer}>
         <ThemedText type="title">Ja</ThemedText>
       </ThemedView>
@@ -87,12 +81,6 @@ export default function TabTwoScreen() {
 }
 
 const styles = StyleSheet.create({
-  headerImage: {
-    color: '#808080',
-    bottom: -90,
-    left: -35,
-    position: 'absolute',
-  },
   titleContainer: {
     flexDirection: 'row',
     gap: 8,

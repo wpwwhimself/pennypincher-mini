@@ -5,25 +5,19 @@ import { ThemedView } from '@/components/ThemedView';
 import { IconSymbol } from '@/components/ui/IconSymbol';
 import { useThemeColor } from '@/hooks/useThemeColor';
 import { Button } from '@react-native-material/core';
+import HeaderIcon from '@/components/pp/HeaderIcon';
 
 export default function HomeScreen() {
   const colors = {
-    light: '#A1CEDC',
-    dark: '#1D3D47',
+    light: '#9bd7ffff',
+    dark: '#82b4d5ff',
   };
   const color = useThemeColor(colors, "tint");
 
   return (
     <ParallaxScrollView
       headerBackgroundColor={colors}
-      headerImage={
-        <IconSymbol
-          size={310}
-          color="#808080"
-          name="library-books"
-          style={styles.headerImage}
-        />
-      }>
+      headerImage={<HeaderIcon name="library-books" />}>
       <ThemedView style={styles.titleContainer}>
         <ThemedText type="title">Transakcje</ThemedText>
       </ThemedView>
@@ -39,12 +33,6 @@ export default function HomeScreen() {
 }
 
 const styles = StyleSheet.create({
-  headerImage: {
-    color: '#808080',
-    bottom: -90,
-    left: -35,
-    position: 'absolute',
-  },
   titleContainer: {
     flexDirection: 'row',
     alignItems: 'center',
