@@ -9,7 +9,7 @@ import { Button } from '@/components/pp/UI';
 export default function HomeScreen() {
   const colors = {
     light: '#5bb5f0ff',
-    dark: '#82b4d5ff',
+    dark: '#276792ff',
   };
   const color = useThemeColor(colors, "tint");
 

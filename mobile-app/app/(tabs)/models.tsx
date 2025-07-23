@@ -10,7 +10,7 @@ import { HeaderIcon } from '@/components/pp/Presentation';
 export default function TabTwoScreen() {
   const colors = {
     light: '#46eb5aff',
-    dark: '#6dd179ff',
+    dark: '#2a9c37ff',
   };
   const color = useThemeColor(colors, "tint");
 
