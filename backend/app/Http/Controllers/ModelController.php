@@ -16,7 +16,7 @@ class ModelController extends Controller
     {
         $model = self::model($model);
         return $model::orderBy("created_at", "desc")
-            ->paginate(25);
+            ->get();
     }
 
     public function show(Request $rq, $model, $id)
