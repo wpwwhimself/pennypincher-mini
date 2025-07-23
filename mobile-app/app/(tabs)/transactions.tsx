@@ -1,11 +1,11 @@
 import { StyleSheet } from 'react-native';
 import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { useThemeColor } from '@/hooks/useThemeColor';
-import { Header, HeaderIcon } from '@/components/pp/Presentation';
-import { FAB } from '@/components/pp/UI';
+import { Header, HeaderIcon, Loader } from '@/components/pp/Presentation';
+import { Button } from '@/components/pp/UI';
 import { useFocusEffect } from 'expo-router';
 import { getData } from '@/helpers/API';
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 
 export default function HomeScreen() {
   const colors = {
@@ -17,7 +17,7 @@ export default function HomeScreen() {
 
   const [data, setData] = useState([]);
 
-  useFocusEffect(() => {
+  useFocusEffect(useCallback(() => {
     setLoading(true);
     getData("transactions")
       .then((data) => {
@@ -29,7 +29,7 @@ export default function HomeScreen() {
       .finally(() => {
         setLoading(false);
       });
-  });
+  }, []));
 
   return (
     <ParallaxScrollView
@@ -37,10 +37,13 @@ export default function HomeScreen() {
       headerImage={<HeaderIcon name="library-books" />}>
       <Header title="Transakcje" />
 
-      <FAB
-        icon={{ name: "add", color: "white" }}
-        color={color}
-      />
+      {loading ? <Loader color={color} /> : <>
+        <Button
+          icon={{ name: "add", color: "white" }}
+          title="Nowa transakcja"
+          color={color}
+        />
+      </>}
 
     </ParallaxScrollView>
   );

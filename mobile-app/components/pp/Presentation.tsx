@@ -3,6 +3,7 @@ import { IconSymbol } from "../ui/IconSymbol"
 import { useThemeColor } from "@/hooks/useThemeColor";
 import { ThemedView } from "../ThemedView";
 import { ThemedText } from "../ThemedText";
+import { LinearProgress } from "@rneui/base";
 
 interface HeaderIconProps {
   name: string,
@@ -30,6 +31,14 @@ export function Header({ title, lvl = "title", icon = undefined }: HeaderProps) 
       <ThemedText type={lvl}>{title}</ThemedText>
     </ThemedView>
   );
+}
+
+export function Loader(props: any) {
+  return (
+    <LinearProgress
+      {...props}
+    />
+  )
 }
 
 export function Text(props: any) {

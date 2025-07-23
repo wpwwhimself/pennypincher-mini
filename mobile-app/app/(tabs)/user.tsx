@@ -1,10 +1,11 @@
 import { StyleSheet, ToastAndroid } from 'react-native';
 import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { useThemeColor } from '@/hooks/useThemeColor';
-import { useEffect, useState } from 'react';
+import { useCallback, useState } from 'react';
 import { getAllAPIConfig, setAPIConfig } from '@/helpers/API';
 import { Button, Input, InputIcon } from '@/components/pp/UI';
-import { Header, HeaderIcon, Text } from '@/components/pp/Presentation';
+import { Header, HeaderIcon, Loader, Text } from '@/components/pp/Presentation';
+import { useFocusEffect } from 'expo-router';
 
 export default function TabTwoScreen() {
   const colors = {
@@ -29,13 +30,13 @@ export default function TabTwoScreen() {
     setLoading(false);
   }
 
-  useEffect(() => {
+  useFocusEffect(useCallback(() => {
     getAllAPIConfig("basic").then((data) => {
       setServer(data.server || "");
       setUsername(data.username || "");
       setPassword(data.password || "");
     })
-  }, []);
+  }, []));
 
   return (
     <ParallaxScrollView
@@ -44,34 +45,36 @@ export default function TabTwoScreen() {
       <Header title="Ja" />
       <Text>Podaj dane do logowania do API.</Text>
 
-      <Input
-        label="Adres serwera"
-        value={server}
-        onChangeText={(text: string) => setServer(text)}
-        leftIcon={<InputIcon name="computer" />}
-        inputMode="url"
-      />
-      <Input
-        label="Nazwa użytkownika"
-        value={username}
-        onChangeText={(text: string) => setUsername(text)}
-        leftIcon={<InputIcon name="person" />}
-      />
-      <Input
-        label="Hasło"
-        value={password}
-        onChangeText={(text: string) => setPassword(text)}
-        leftIcon={<InputIcon name="key" />}
-        secureTextEntry={true}
-        autoComplete="password"
-      />
-      <Button
-        title="Zapisz"
-        iconName="save"
-        loading={loading}
-        color={color}
-        onPress={() => saveAllAPIData()}
-      />
+      {loading ? <Loader color={color} /> : <>
+        <Input
+          label="Adres serwera"
+          value={server}
+          onChangeText={(text: string) => setServer(text)}
+          leftIcon={<InputIcon name="computer" />}
+          inputMode="url"
+        />
+        <Input
+          label="Nazwa użytkownika"
+          value={username}
+          onChangeText={(text: string) => setUsername(text)}
+          leftIcon={<InputIcon name="person" />}
+        />
+        <Input
+          label="Hasło"
+          value={password}
+          onChangeText={(text: string) => setPassword(text)}
+          leftIcon={<InputIcon name="key" />}
+          secureTextEntry={true}
+          autoComplete="password"
+        />
+        <Button
+          title="Zapisz"
+          iconName="save"
+          loading={loading}
+          color={color}
+          onPress={() => saveAllAPIData()}
+        />
+      </>}
     </ParallaxScrollView>
   );
 }
