@@ -4,7 +4,7 @@ import { useThemeColor } from '@/hooks/useThemeColor';
 import { useCallback, useState } from 'react';
 import { getAllAPIConfig, setAPIConfig } from '@/helpers/API';
 import { Button, Input, InputIcon } from '@/components/pp/UI';
-import { Header, HeaderIcon, Loader, Text } from '@/components/pp/Presentation';
+import { Header, HeaderIcon, Loader, ParallaxIcon, Text } from '@/components/pp/Presentation';
 import { useFocusEffect } from 'expo-router';
 
 export default function TabTwoScreen() {
@@ -41,7 +41,7 @@ export default function TabTwoScreen() {
   return (
     <ParallaxScrollView
       headerBackgroundColor={colors}
-      headerImage={<HeaderIcon name="person" />}>
+      headerImage={<ParallaxIcon name="user" />}>
       <Header title="Ja" />
       <Text>Podaj dane do logowania do API.</Text>
 
@@ -50,20 +50,20 @@ export default function TabTwoScreen() {
           label="Adres serwera"
           value={server}
           onChangeText={(text: string) => setServer(text)}
-          leftIcon={<InputIcon name="computer" />}
+          iconName="server"
           inputMode="url"
         />
         <Input
           label="Nazwa użytkownika"
           value={username}
           onChangeText={(text: string) => setUsername(text)}
-          leftIcon={<InputIcon name="person" />}
+          iconName="user"
         />
         <Input
           label="Hasło"
           value={password}
           onChangeText={(text: string) => setPassword(text)}
-          leftIcon={<InputIcon name="key" />}
+          iconName="key"
           secureTextEntry={true}
           autoComplete="password"
         />
@@ -79,15 +79,3 @@ export default function TabTwoScreen() {
   );
 }
 
-const styles = StyleSheet.create({
-  titleContainer: {
-    flexDirection: 'row',
-    gap: 8,
-  },
-  input: {
-    height: 40,
-    margin: 12,
-    borderWidth: 1,
-    padding: 10,
-  },
-});

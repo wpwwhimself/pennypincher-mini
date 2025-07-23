@@ -3,10 +3,10 @@ import React from 'react';
 import { Platform } from 'react-native';
 
 import { HapticTab } from '@/components/HapticTab';
-import { IconSymbol } from '@/components/ui/IconSymbol';
 import TabBarBackground from '@/components/ui/TabBarBackground';
 import { Colors } from '@/constants/Colors';
 import { useColorScheme } from '@/hooks/useColorScheme';
+import { TabIcon } from '@/components/pp/Presentation';
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();
@@ -30,21 +30,21 @@ export default function TabLayout() {
         name="transactions"
         options={{
           title: 'Transakcje',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="library-books" color={color} />,
+          tabBarIcon: () => <TabIcon name="receipt" />,
         }}
       />
       <Tabs.Screen
         name="models"
         options={{
           title: 'Podziały',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="inbox" color={color} />,
+          tabBarIcon: () => <TabIcon name="inbox" />,
         }}
       />
       <Tabs.Screen
         name="user"
         options={{
           title: 'Ja',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="person" color={color} />,
+          tabBarIcon: () => <TabIcon name="user" />,
         }}
       />
     </Tabs>

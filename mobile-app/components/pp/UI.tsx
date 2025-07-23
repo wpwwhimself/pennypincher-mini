@@ -1,9 +1,9 @@
 import {
+  Icon,
   Button as OrigButton,
   FAB as OrigFAB,
   Input as OrigInput
 } from '@rneui/base';
-import { IconSymbol } from "../ui/IconSymbol"
 import { useThemeColor } from '@/hooks/useThemeColor';
 
 export function Button(props: any) {
@@ -28,6 +28,7 @@ export function Input(props: any) {
   return (
     <OrigInput
       color={color}
+      leftIcon={<InputIcon name={props.iconName} />}
       {...props}
     />
   );
@@ -38,7 +39,7 @@ interface InputIconProps {
 }
 export function InputIcon({ name }: InputIconProps) {
   const color = useThemeColor({ light: undefined, dark: undefined }, "text");
-  return <IconSymbol name={name} size={24} color={color} />
+  return <Icon type="font-awesome-5" size={16} solid name={name} color={color} />
 }
 
 
@@ -46,5 +47,5 @@ interface ButtonIconProps {
   name: string,
 }
 export function ButtonIcon({ name }: ButtonIconProps) {
-  return <IconSymbol name={name} size={24} color="white" />
+  return <Icon type="font-awesome-5" size={16} iconStyle={{ marginRight: 5 }} solid name={name} color="white" />
 }

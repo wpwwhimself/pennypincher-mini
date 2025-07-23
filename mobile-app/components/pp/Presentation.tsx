@@ -1,21 +1,27 @@
 import { StyleSheet } from "react-native"
-import { IconSymbol } from "../ui/IconSymbol"
 import { useThemeColor } from "@/hooks/useThemeColor";
 import { ThemedView } from "../ThemedView";
 import { ThemedText } from "../ThemedText";
-import { LinearProgress } from "@rneui/base";
+import { Dialog, Icon, LinearProgress } from "@rneui/base";
+
+export function Modal(props: any) {
+  return (
+    <Dialog
+      {...props}
+    />
+  )
+}
 
 interface HeaderIconProps {
   name: string,
 }
 export function HeaderIcon({ name }: HeaderIconProps) {
-  const color = useThemeColor({ light: undefined, dark: undefined }, "background");
+  const color = useThemeColor({ light: undefined, dark: undefined }, "text");
 
-  return <IconSymbol
-    size={310}
+  return <Icon type="font-awesome-5" solid
+    size={24}
     color={color}
     name={name}
-    style={styles.headerImage}
   />
 }
 
@@ -23,14 +29,45 @@ interface HeaderProps {
   title: string,
   lvl?: "title" | "subtitle",
   icon?: string,
+  centered?: boolean,
 }
-export function Header({ title, lvl = "title", icon = undefined }: HeaderProps) {
+export function Header({ title, lvl = "title", icon = undefined, centered = false }: HeaderProps) {
   return (
-    <ThemedView style={styles.titleContainer}>
-      {icon && <IconSymbol name={icon} size={24} color="#808080" />}
+    <ThemedView style={{ ...styles.titleContainer, justifyContent: centered ? "center" : "flex-start" }}>
+      {icon && <HeaderIcon name={icon} />}
       <ThemedText type={lvl}>{title}</ThemedText>
     </ThemedView>
   );
+}
+
+
+interface ParallaxIconProps {
+  name: string,
+}
+export function ParallaxIcon({ name }: ParallaxIconProps) {
+  const color = useThemeColor({ light: undefined, dark: undefined }, "background");
+
+  return (
+    <Icon type="font-awesome-5" solid
+      size={250}
+      name={name}
+      color={color}
+      style={styles.parallaxIcon}
+    />
+  )
+}
+
+interface TabIconProps {
+  name: string,
+}
+export function TabIcon({ name }: TabIconProps) {
+  return (
+    <Icon type="font-awesome-5" solid
+      size={24}
+      name={name}
+      color="#808080"
+    />
+  )
 }
 
 export function Loader(props: any) {
@@ -48,14 +85,16 @@ export function Text(props: any) {
 }
 
 const styles = StyleSheet.create({
-  headerImage: {
-    bottom: -90,
-    left: -35,
-    position: 'absolute',
+  parallaxIcon: {
+    bottom: -50,
+    left: -75,
+    height: "100%",
+    // position: 'absolute',
   },
   titleContainer: {
     flexDirection: 'row',
     alignItems: 'center',
     gap: 8,
+    backgroundColor: "transparent",
   },
 });
