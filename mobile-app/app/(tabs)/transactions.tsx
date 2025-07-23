@@ -2,14 +2,13 @@ import { StyleSheet } from 'react-native';
 import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
-import { IconSymbol } from '@/components/ui/IconSymbol';
 import { useThemeColor } from '@/hooks/useThemeColor';
-import { Button } from '@react-native-material/core';
-import HeaderIcon from '@/components/pp/HeaderIcon';
+import { HeaderIcon } from '@/components/pp/Presentation';
+import { Button } from '@/components/pp/UI';
 
 export default function HomeScreen() {
   const colors = {
-    light: '#9bd7ffff',
+    light: '#5bb5f0ff',
     dark: '#82b4d5ff',
   };
   const color = useThemeColor(colors, "tint");
@@ -24,7 +23,7 @@ export default function HomeScreen() {
 
       <Button
         title="Nowa transakcja"
-        leading={<IconSymbol name="add" size={24} color="#808080" />}
+        iconName="add"
         color={color}
       />
 

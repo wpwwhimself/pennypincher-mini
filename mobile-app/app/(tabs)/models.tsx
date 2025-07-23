@@ -3,13 +3,13 @@ import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
 import { IconSymbol } from '@/components/ui/IconSymbol';
-import { Button } from '@react-native-material/core';
+import { Button } from '@/components/pp/UI';
 import { useThemeColor } from '@/hooks/useThemeColor';
-import HeaderIcon from '@/components/pp/HeaderIcon';
+import { HeaderIcon } from '@/components/pp/Presentation';
 
 export default function TabTwoScreen() {
   const colors = {
-    light: '#86ff94ff',
+    light: '#46eb5aff',
     dark: '#6dd179ff',
   };
   const color = useThemeColor(colors, "tint");
@@ -30,7 +30,7 @@ export default function TabTwoScreen() {
 
       <Button
         title="Nowe konto"
-        leading={<IconSymbol name="add" size={24} color="#808080" />}
+        iconName="add"
         color={color}
       />
 
@@ -41,7 +41,7 @@ export default function TabTwoScreen() {
 
       <Button
         title="Nowa kategoria"
-        leading={<IconSymbol name="add" size={24} color="#808080" />}
+        iconName="add"
         color={color}
       />
       

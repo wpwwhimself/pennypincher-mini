@@ -2,32 +2,33 @@ import { StyleSheet, ToastAndroid } from 'react-native';
 import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
-import { IconSymbol } from '@/components/ui/IconSymbol';
-import { Button } from '@react-native-material/core'
 import { useThemeColor } from '@/hooks/useThemeColor';
 import { useEffect, useState } from 'react';
-import Input from '@/components/pp/Input';
-import InputIcon from '@/components/pp/InputIcon';
-import { getAllAPIData, getAPIData, setAPIData } from '@/helpers/API';
-import HeaderIcon from '@/components/pp/HeaderIcon';
+import { getAllAPIData, setAPIData } from '@/helpers/API';
+import { Button, Input, InputIcon } from '@/components/pp/UI';
+import { HeaderIcon } from '@/components/pp/Presentation';
 
 export default function TabTwoScreen() {
   const colors = {
-    light: '#f39bffff',
-    dark: '#ce85d7ff',
+    light: '#f06161ff',
+    dark: '#af7373ff',
   };
   const color = useThemeColor(colors, "tint");
+
+  const [loading, setLoading] = useState(false);
 
   const [server, setServer] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
   const saveAllAPIData = () => {
+    setLoading(true);
     setAPIData('server', server);
     setAPIData('username', username);
     setAPIData('password', password);
 
     ToastAndroid.show('Dane API zapisane', ToastAndroid.SHORT);
+    setLoading(false);
   }
 
   useEffect(() => {
@@ -50,29 +51,27 @@ export default function TabTwoScreen() {
         label="Adres serwera"
         value={server}
         onChangeText={(text: string) => setServer(text)}
-        leading={<InputIcon name="computer" />}
-        color={color}
+        leftIcon={<InputIcon name="computer" />}
         inputMode="url"
       />
       <Input
         label="Nazwa użytkownika"
         value={username}
         onChangeText={(text: string) => setUsername(text)}
-        leading={<InputIcon name="person" />}
-        color={color}
+        leftIcon={<InputIcon name="person" />}
       />
       <Input
         label="Hasło"
         value={password}
         onChangeText={(text: string) => setPassword(text)}
-        leading={<InputIcon name="key" />}
-        color={color}
+        leftIcon={<InputIcon name="key" />}
         secureTextEntry={true}
         autoComplete="password"
       />
       <Button
         title="Zapisz"
-        leading={<InputIcon name="save" />}
+        iconName="save"
+        loading={loading}
         color={color}
         onPress={() => saveAllAPIData()}
       />

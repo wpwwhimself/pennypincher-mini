@@ -2,11 +2,11 @@ import { StyleSheet } from "react-native"
 import { IconSymbol } from "../ui/IconSymbol"
 import { useThemeColor } from "@/hooks/useThemeColor";
 
-interface InputIconProps {
+interface HeaderIconProps {
   name: string
 }
 
-export default function HeaderIcon({ name }: InputIconProps) {
+export function HeaderIcon({ name }: HeaderIconProps) {
   const color = useThemeColor({ light: undefined, dark: undefined }, "background");
 
   return <IconSymbol
