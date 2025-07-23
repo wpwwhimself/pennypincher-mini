@@ -1,11 +1,7 @@
-import { StyleSheet } from 'react-native';
 import ParallaxScrollView from '@/components/ParallaxScrollView';
-import { ThemedText } from '@/components/ThemedText';
-import { ThemedView } from '@/components/ThemedView';
-import { IconSymbol } from '@/components/ui/IconSymbol';
 import { Button } from '@/components/pp/UI';
 import { useThemeColor } from '@/hooks/useThemeColor';
-import { HeaderIcon } from '@/components/pp/Presentation';
+import { Header, HeaderIcon, Text } from '@/components/pp/Presentation';
 
 export default function TabTwoScreen() {
   const colors = {
@@ -18,15 +14,10 @@ export default function TabTwoScreen() {
     <ParallaxScrollView
       headerBackgroundColor={colors}
       headerImage={<HeaderIcon name="inbox" />}>
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Podziały</ThemedText>
-      </ThemedView>
-      <ThemedText>Tutaj zdefiniujesz konta i kategorie transakcji.</ThemedText>
+      <Header title="Podziały" />
+      <Text>Tutaj zdefiniujesz konta i kategorie transakcji.</Text>
 
-      <ThemedView style={styles.titleContainer}>
-        <IconSymbol name="account-balance" size={24} color="#808080" />
-        <ThemedText type="subtitle">Konta</ThemedText>
-      </ThemedView>
+      <Header title="Konta" lvl="subtitle" icon="account-balance" />
 
       <Button
         title="Nowe konto"
@@ -34,10 +25,7 @@ export default function TabTwoScreen() {
         color={color}
       />
 
-      <ThemedView style={styles.titleContainer}>
-        <IconSymbol name="inbox" size={24} color="#808080" />
-        <ThemedText type="subtitle">Kategorie</ThemedText>
-      </ThemedView>
+      <Header title="Kategorie" lvl="subtitle" icon="inbox" />
 
       <Button
         title="Nowa kategoria"
@@ -48,11 +36,3 @@ export default function TabTwoScreen() {
     </ParallaxScrollView>
   );
 }
-
-const styles = StyleSheet.create({
-  titleContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 8,
-  },
-});

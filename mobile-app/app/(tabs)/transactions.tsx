@@ -1,10 +1,11 @@
 import { StyleSheet } from 'react-native';
 import ParallaxScrollView from '@/components/ParallaxScrollView';
-import { ThemedText } from '@/components/ThemedText';
-import { ThemedView } from '@/components/ThemedView';
 import { useThemeColor } from '@/hooks/useThemeColor';
-import { HeaderIcon } from '@/components/pp/Presentation';
-import { Button } from '@/components/pp/UI';
+import { Header, HeaderIcon } from '@/components/pp/Presentation';
+import { FAB } from '@/components/pp/UI';
+import { useFocusEffect } from 'expo-router';
+import { getData } from '@/helpers/API';
+import { useState } from 'react';
 
 export default function HomeScreen() {
   const colors = {
@@ -12,18 +13,32 @@ export default function HomeScreen() {
     dark: '#276792ff',
   };
   const color = useThemeColor(colors, "tint");
+  const [loading, setLoading] = useState(false);
+
+  const [data, setData] = useState([]);
+
+  useFocusEffect(() => {
+    setLoading(true);
+    getData("transactions")
+      .then((data) => {
+        setData(data.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  });
 
   return (
     <ParallaxScrollView
       headerBackgroundColor={colors}
       headerImage={<HeaderIcon name="library-books" />}>
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Transakcje</ThemedText>
-      </ThemedView>
+      <Header title="Transakcje" />
 
-      <Button
-        title="Nowa transakcja"
-        iconName="add"
+      <FAB
+        icon={{ name: "add", color: "white" }}
         color={color}
       />
 

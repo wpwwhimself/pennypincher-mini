@@ -1,12 +1,10 @@
 import { StyleSheet, ToastAndroid } from 'react-native';
 import ParallaxScrollView from '@/components/ParallaxScrollView';
-import { ThemedText } from '@/components/ThemedText';
-import { ThemedView } from '@/components/ThemedView';
 import { useThemeColor } from '@/hooks/useThemeColor';
 import { useEffect, useState } from 'react';
-import { getAllAPIData, setAPIData } from '@/helpers/API';
+import { getAllAPIConfig, setAPIConfig } from '@/helpers/API';
 import { Button, Input, InputIcon } from '@/components/pp/UI';
-import { HeaderIcon } from '@/components/pp/Presentation';
+import { Header, HeaderIcon, Text } from '@/components/pp/Presentation';
 
 export default function TabTwoScreen() {
   const colors = {
@@ -23,16 +21,16 @@ export default function TabTwoScreen() {
 
   const saveAllAPIData = () => {
     setLoading(true);
-    setAPIData('server', server);
-    setAPIData('username', username);
-    setAPIData('password', password);
+    setAPIConfig('server', server);
+    setAPIConfig('username', username);
+    setAPIConfig('password', password);
 
     ToastAndroid.show('Dane API zapisane', ToastAndroid.SHORT);
     setLoading(false);
   }
 
   useEffect(() => {
-    getAllAPIData().then((data) => {
+    getAllAPIConfig("basic").then((data) => {
       setServer(data.server || "");
       setUsername(data.username || "");
       setPassword(data.password || "");
@@ -43,10 +41,9 @@ export default function TabTwoScreen() {
     <ParallaxScrollView
       headerBackgroundColor={colors}
       headerImage={<HeaderIcon name="person" />}>
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Ja</ThemedText>
-      </ThemedView>
-      <ThemedText>Podaj dane do logowania do API.</ThemedText>
+      <Header title="Ja" />
+      <Text>Podaj dane do logowania do API.</Text>
+
       <Input
         label="Adres serwera"
         value={server}
